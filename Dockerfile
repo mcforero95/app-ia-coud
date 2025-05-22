@@ -22,8 +22,11 @@ FROM nginx:alpine
 # Copia los archivos construidos desde la etapa anterior
 COPY --from=build /app/dist/frontent-ia /usr/share/nginx/html
 
-# Expone el puerto 80
-EXPOSE 80
+# 🔧 Ajusta nginx para escuchar en el puerto requerido por Cloud Run
+RUN sed -i 's/80;/8080;/g' /etc/nginx/conf.d/default.conf
+
+# Expone el puerto 8080 como lo requiere Cloud Run
+EXPOSE 8080
 
 # Comando para ejecutar Nginx
 CMD ["nginx", "-g", "daemon off;"]
