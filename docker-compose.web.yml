@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  frontend:
+    build:
+      context: ../app-ia-coud
+    container_name: frontent-ia
+    ports:
+      - "80:80"
+    restart: always
